@@ -1,0 +1,25 @@
+{% extends 'dz1_app/base.html' %}
+
+{% block title %} DZ3  {% endblock %}
+
+{% block content %}
+<!--<h1>{{ client_id }}</h1>-->
+<h1>Клиент: {{ client.name }}</h1>
+
+ <h2>Last 7 days</h2>
+    {% for product, date in products_last_7_days %}
+        <p>{{ product.name }} - {{ product.price }} ({{ date }})</p>
+    {% endfor %}
+
+    <h2>Last 30 days</h2>
+    {% for product, date in products_last_30_days %}
+        <p>{{ product.name }} - {{ product.price }} ({{ product.quantity }}) - Purchased on: {{ date }}</p>
+    {% endfor %}
+
+    <h2>Last 365 days</h2>
+    {% for product, date in products_last_365_days %}
+        <p>{{ product.name }} - {{ product.price }} ({{ product.quantity }}) - Purchased on: {{ date }}</p>
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'dz1_app/base.html' %}
+
+{% block title %} DZ3  {% endblock %}
+
+{% block content %}
+<!--<h1>{{ client_id }}</h1>-->
+<h1>{{ orders.0.client.name }}</h1>
+<br />
+
+{% for i in orders %}
+<!--{{ i }}-->
+<h2>Заказ №{{ i.id }}</h2>
+        <p>Заказ Date: {{ i.order_date }}</p>
+        <p>Total Amount: {{ i.total_amount }}</p>
+
+        <ul>
+            {% for product in i.products.all %}
+                <li>{{ product.name }} - {{ product.price }} </li>
+            {% endfor %}
+        </ul>
+
+{% endfor %}
+
+
+
+{% endblock %}

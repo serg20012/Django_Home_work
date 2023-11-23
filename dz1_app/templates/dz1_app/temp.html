@@ -1,0 +1,31 @@
+{% extends 'sem2myapp/base.html' %}
+
+{% block title %}   <title>task5</title> {% endblock %}
+
+{% block content %}
+
+<!--{{ i.is_published }}-->
+<!--{{ i.description }}-->
+<h1>{{ art.title }} <br>
+    {{ art.description }} <br>
+Автор статьи: {{ art.author_id }} <br>
+Просмотров: {{ art.count_views }}
+</h1>
+<br>
+<br>
+<br>
+{% if comments %}
+    {% for comment in comments %}
+        Текст комментария: {{ comment.description }} <br>
+        Автор комментария: {{ comment.author_id }} - {{ comment.create_at }} <br>
+        {% if comment.create_at != comment.change_at %} /
+             Изменено - {{ comment.change_at }} / <br>
+
+        {% endif %}
+
+    {% endfor %}
+{% endif %}
+<br>
+<br>
+<br>
+{% endblock %}
