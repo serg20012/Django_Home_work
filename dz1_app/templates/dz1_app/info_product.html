@@ -1,0 +1,22 @@
+{% extends 'dz1_app/base.html' %}
+
+{% block title %} DZ4 {% endblock %}
+
+{% block content %}
+<!--<h1>{{ client_id }}</h1>-->
+ID товара: {{ product.id }} <br>
+Наименование:  {{ product.name }}<br>
+Описание: {{ product.description }} <br>
+Цена: {{ product.price }}<br>
+Кол-во: {{ product.quantity }}<br>
+Дата добавления: {{ product.added_date }}<br>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Отправить">
+</form>
+
+
+
+{% endblock %}

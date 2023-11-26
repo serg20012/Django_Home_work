@@ -1,9 +1,10 @@
 from datetime import timedelta, datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.utils import timezone
 
-from dz1_app.models import Order, Client
+from dz1_app.forms import ProductEditForm
+from dz1_app.models import Order, Client, Product
 
 
 def main(request):
@@ -87,3 +88,23 @@ def get_client_products_in_date_range(client_id, start_date, end_date):
             print('-----------------')
 
     return products_with_dates
+
+def get_product(request, product_id: int):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductEditForm(request.POST)
+        if form.is_valid():
+            product = Product(**form.cleaned_data)
+            product.save()
+            # return redirect(to=f'get_product/{product_id}')
+    else:
+        form = ProductEditForm()
+
+    context = {
+        'product': product,
+        'form': form,
+    }
+    print(product.name)
+
+    return render(request, "dz1_app/info_product.html", context=context)
+
